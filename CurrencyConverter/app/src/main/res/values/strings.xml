@@ -3,4 +3,6 @@
     <string name="app_name">Currency Converter</string>
     <string name="hint_amount">Enter Amount</string>
     <string name="btn_convert">Convert</string>
+    <string name="btn_settings">Settings</string>
+
 </resources>
