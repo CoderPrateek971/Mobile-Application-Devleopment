@@ -55,5 +55,16 @@
         app:layout_constraintTop_toBottomOf="@+id/convertBtn"
         tools:layout_editor_absoluteX="115dp" />
 
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="129dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="112dp"
+        android:textSize="@dimen/text_large"
+        app:layout_constraintBottom_toTopOf="@+id/settingBtn"
+        app:layout_constraintTop_toBottomOf="@+id/convertBtn"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="131dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
