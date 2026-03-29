@@ -53,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);
 
+        videoView.setOnErrorListener((mp, what, extra) -> {
+            Toast.makeText(this, "Audio/Video Error", Toast.LENGTH_SHORT).show();
+            return true;
+        });
+
     }
 
     private void openFile() {
@@ -74,13 +79,11 @@ public class MainActivity extends AppCompatActivity {
         videoView.setVideoURI(mediaUri);
 
         videoView.setOnPreparedListener(mp -> {
+            mp.setVolume(1f, 1f);
             videoView.start();
         });
 
-        videoView.setOnErrorListener((mp, what, extra) -> {
-            Toast.makeText(this, "Video failed to load", Toast.LENGTH_SHORT).show();
-            return true;
-        });
+
     }
     private void playMedia() {
         if (mediaUri == null) return;
@@ -117,7 +120,4 @@ public class MainActivity extends AppCompatActivity {
             videoView.start();
         }
     }
-
-
-
 }
