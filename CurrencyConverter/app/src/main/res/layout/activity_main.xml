@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
         android:layout_marginTop="40dp"
-        android:text="Currency Converter"
+        android:text="@string/Heading"
         android:textSize="30sp"
         android:textColor="@color/textColor"
         app:layout_constraintBottom_toTopOf="@+id/amount"
@@ -106,7 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:text="From"
+        android:text="@string/from"
         app:layout_constraintBottom_toTopOf="@+id/fromCurrency"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -115,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:text="To"
+        android:text="@string/to"
         app:layout_constraintBottom_toTopOf="@+id/toCurrency"
         app:layout_constraintStart_toStartOf="parent" />
 

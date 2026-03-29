@@ -6,6 +6,15 @@
     <string name="result_text">Result:</string>
     <string name="result_format">Result: %1$.2f</string>
     <string name="dark_mode">Enable Dark Mode</string>
+    <string name="to">To</string>
+    <string name="from">From</string>
+    <string name="Heading">Currency Converter</string>
+    <string name="backBtn">Back</string>
+
+
+
+
+
 
     <string-array name="currencies">
         <item>INR</item>
