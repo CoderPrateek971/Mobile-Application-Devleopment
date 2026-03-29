@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MediaController;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
@@ -46,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         pause.setOnClickListener(v -> pauseMedia());
         stop.setOnClickListener(v -> stopMedia());
         restart.setOnClickListener(v -> restartMedia());
+        MediaController mediaController = new MediaController(this);
+        mediaController.setAnchorView(videoView);
+        videoView.setMediaController(mediaController);
+
     }
 
     private void openFile() {
@@ -55,14 +62,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadUrl() {
-        String url = urlInput.getText().toString();
+        String url = urlInput.getText().toString().trim();
 
-        if (url.isEmpty()) return;
-
+        if (url.isEmpty()) {
+            urlInput.setError("Enter URL");
+            return;
+        }
+        Log.d("VIDEO_URL", url);
         mediaUri = Uri.parse(url);
-        videoView.setVideoURI(mediaUri);
-    }
 
+        videoView.setVideoURI(mediaUri);
+
+        videoView.setOnPreparedListener(mp -> {
+            videoView.start();
+        });
+
+        videoView.setOnErrorListener((mp, what, extra) -> {
+            Toast.makeText(this, "Video failed to load", Toast.LENGTH_SHORT).show();
+            return true;
+        });
+    }
     private void playMedia() {
         if (mediaUri == null) return;
 
@@ -76,12 +95,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void stopMedia() {
-        videoView.stopPlayback();
+        videoView.pause();
+        videoView.seekTo(0);
     }
 
     private void restartMedia() {
         if (mediaUri != null) {
-            videoView.setVideoURI(mediaUri);
+            videoView.seekTo(0);
             videoView.start();
         }
     }
@@ -94,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             mediaUri = data.getData();
 
             videoView.setVideoURI(mediaUri);
+            videoView.start();
         }
     }
 
