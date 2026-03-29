@@ -17,5 +17,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="43dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
