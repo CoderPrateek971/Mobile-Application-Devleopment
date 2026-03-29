@@ -22,64 +22,102 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
+        app:layout_constraintVertical_bias="0.215" />
 
     <Spinner
         android:id="@+id/fromCurrency"
         android:layout_width="324dp"
         android:layout_height="39dp"
-        android:layout_marginTop="68dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amount"
-        app:layout_constraintVertical_bias="0.002"
-        tools:layout_editor_absoluteX="43dp" />
+        android:layout_marginStart="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/toCurrency"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.864" />
 
     <Spinner
         android:id="@+id/toCurrency"
         android:layout_width="324dp"
         android:layout_height="39dp"
-        android:layout_marginTop="68dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amount"
-        app:layout_constraintVertical_bias="0.139"
-        tools:layout_editor_absoluteX="43dp" />
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="124dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amount" />
 
     <Button
         android:id="@+id/convertBtn"
         android:layout_width="239dp"
         android:layout_height="50dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginBottom="236dp"
+        android:backgroundTint="@color/btnColor"
         android:text="@string/btn_convert"
         android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fromCurrency"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/toCurrency" />
 
     <Button
         android:id="@+id/settingBtn"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="188dp"
+        android:layout_marginTop="224dp"
+        android:backgroundTint="@color/btnColor"
         android:onClick="openSettings"
         android:text="@string/btn_settings"
         android:textColor="@color/textColor"
-        app:layout_constraintTop_toBottomOf="@+id/convertBtn"
-        tools:layout_editor_absoluteX="115dp" />
+        app:layout_constraintEnd_toEndOf="@+id/convertBtn"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/convertBtn"
+        app:layout_constraintTop_toBottomOf="@+id/convertBtn" />
 
     <TextView
         android:id="@+id/result"
         android:layout_width="129dp"
         android:layout_height="47dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginBottom="84dp"
+        android:textColor="@color/textColor"
         android:textSize="@dimen/text_large"
         app:layout_constraintBottom_toTopOf="@+id/settingBtn"
+        app:layout_constraintEnd_toEndOf="@+id/convertBtn"
+        app:layout_constraintStart_toStartOf="@+id/convertBtn"
         app:layout_constraintTop_toBottomOf="@+id/convertBtn"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="131dp"
-        android:textColor="@color/textColor"/>
+        app:layout_constraintVertical_bias="0.95" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="40dp"
+        android:text="Currency Converter"
+        android:textSize="30sp"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toTopOf="@+id/amount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="From"
+        app:layout_constraintBottom_toTopOf="@+id/fromCurrency"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="To"
+        app:layout_constraintBottom_toTopOf="@+id/toCurrency"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

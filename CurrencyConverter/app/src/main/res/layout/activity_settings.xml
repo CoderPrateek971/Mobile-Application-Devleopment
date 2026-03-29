@@ -9,21 +9,37 @@
 
     <Switch
         android:id="@+id/themeSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="332dp"
-        android:text="@string/dark_mode"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="56dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="116dp"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="-25dp"
+
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/btnColor"
         android:text="Back"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="43dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:text="@string/dark_mode"
+        android:textSize="@dimen/text_large"
+        app:layout_constraintBottom_toBottomOf="@+id/themeSwitch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/themeSwitch" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

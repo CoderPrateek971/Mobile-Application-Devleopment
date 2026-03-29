@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="backgroundColor">#FFFFFF</color>
     <color name="textColor">#000000</color>
+    <color name="btnColor">#00BCD4</color>
+
+
 </resources>
