@@ -32,6 +32,15 @@
         app:layout_constraintVertical_bias="0.002"
         tools:layout_editor_absoluteX="43dp" />
 
+    <Spinner
+        android:id="@+id/toCurrency"
+        android:layout_width="324dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amount"
+        app:layout_constraintVertical_bias="0.002"
+        tools:layout_editor_absoluteX="43dp" />
     <Button
         android:id="@+id/convertBtn"
         android:layout_width="239dp"

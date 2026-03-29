@@ -1,16 +1,16 @@
 package com.example.currencyconverter;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,15 +22,38 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences prefs = getSharedPreferences("AppSettings", MODE_PRIVATE);
+        boolean isDark = prefs.getBoolean("DarkMode", false);
+
+        if (isDark) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        fromCurrency = findViewById(R.id.fromCurrency);
+        toCurrency = findViewById(R.id.toCurrency);
+        amount = findViewById(R.id.amount);
+        result = findViewById(R.id.result);
+        converterBtn = findViewById(R.id.convertBtn);
+
+        // Use string-array from XML
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.currencies,
+                android.R.layout.simple_spinner_item
+        );
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        fromCurrency.setAdapter(adapter);
+        toCurrency.setAdapter(adapter);
+
+        converterBtn.setOnClickListener(v -> convertCurrency());
     }
+
     private void convertCurrency() {
 
         if (amount.getText().toString().isEmpty()) {
@@ -46,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         double rate = getRate(from, to);
         double converted = amt * rate;
 
-        result.setText(getString(R.string.result_format,converted);
+        result.setText(getString(R.string.result_format,converted));
     }
     private double getRate(String from, String to) {
 
@@ -69,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return inr * target;
+    }
+
+    public void openSettings(View view) {
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 
 }
