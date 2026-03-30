@@ -51,13 +51,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onResume();
 
         if (accelerometer != null)
-            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
 
         if (lightSensor != null)
-            sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_GAME);
 
         if (proximitySensor != null)
-            sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
@@ -67,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
 
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -77,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             float z = event.values[2];
 
             accelText.setText(getString(R.string.accelerometer_format, x, y, z));
-
+        }
             if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
                 float light = event.values[0];
                 lightText.setText(getString(R.string.light_format, light));
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 float proximity = event.values[0];
                 proximityText.setText(getString(R.string.proximity_format, proximity));
             }
-        }
+
 
     }
 }
