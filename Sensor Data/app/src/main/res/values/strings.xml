@@ -4,4 +4,8 @@
     <string name="light">Light:</string>
     <string name="proximity">Proximity:</string>
     <string name="not_available">Not Available</string>
+    <string name="accelerometer_format">
+    Accelerometer: X: %.2f Y: %.2f Z: %.2f</string>
+    <string name="light_format">Light: %.2f</string>
+    <string name="proximity_format">Proximity: %.2f</string>
 </resources>

@@ -66,13 +66,28 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         sensorManager.unregisterListener(this);
     }
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-    }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
+
+            accelText.setText(getString(R.string.accelerometer_format, x, y, z));
+
+            if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
+                float light = event.values[0];
+                lightText.setText(getString(R.string.light_format, light));
+            }
+
+            if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+                float proximity = event.values[0];
+                proximityText.setText(getString(R.string.proximity_format, proximity));
+            }
+        }
 
     }
 }
