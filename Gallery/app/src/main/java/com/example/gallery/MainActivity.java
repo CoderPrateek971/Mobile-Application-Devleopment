@@ -3,6 +3,7 @@ package com.example.gallery;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 
@@ -38,6 +39,19 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(intent, REQUEST_IMAGE);
+    }
+
+    private File createImageFile() throws IOException {
+
+        String name = "IMG_" + System.currentTimeMillis();
+
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        File image = File.createTempFile(name, ".jpg", storageDir);
+
+        currentPath = image.getAbsolutePath();
+
+        return image;
     }
 
 
