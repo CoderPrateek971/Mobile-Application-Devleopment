@@ -1,24 +1,48 @@
 package com.example.gallery;
 
 import android.os.Bundle;
+import android.os.Environment;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.io.File;
+import java.util.ArrayList;
 
 public class GalleryActivity extends AppCompatActivity {
+    RecyclerView recyclerView;
+    ArrayList<File> imageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_gallery);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        recyclerView = findViewById(R.id.recyclerView);
+
+        File folder = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File[] files = folder.listFiles();
+
+        imageList = new ArrayList<>();
+
+        if (files != null) {
+            for (File file : files) {
+                if (file.getName().endsWith(".jpg")) {
+                    imageList.add(file);
+                }
+            }
+        }
+
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+
+        ImageAdapter adapter = new ImageAdapter(this, imageList);
+        recyclerView.setAdapter(adapter);
+
+
     }
 }
