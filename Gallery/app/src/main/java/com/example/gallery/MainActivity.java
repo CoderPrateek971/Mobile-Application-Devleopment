@@ -37,15 +37,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void takePhoto(View view) throws IOException {
+        try {
+            File file = createImageFile();
 
-        File file = createImageFile();
+            imageUri = FileProvider.getUriForFile(this,
+                    getPackageName() + ".provider", file);
 
-        imageUri = FileProvider.getUriForFile(this,
-                getPackageName() + ".provider", file);
-
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        startActivityForResult(intent, REQUEST_IMAGE);
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            startActivityForResult(intent, REQUEST_IMAGE);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     private File createImageFile() throws IOException {

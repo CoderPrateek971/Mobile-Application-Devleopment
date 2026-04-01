@@ -2,6 +2,7 @@ package com.example.gallery;
 
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,8 +41,9 @@ public class GalleryActivity extends AppCompatActivity {
         }
         File[] files = folder.listFiles();
 
-        imageList = new ArrayList<>();
 
+        imageList = new ArrayList<>();
+        Log.d("DEBUG", "Folder: " + folder.getAbsolutePath());
         if (files != null) {
             for (File file : files) {
                 if (file.getName().endsWith(".jpg")) {
