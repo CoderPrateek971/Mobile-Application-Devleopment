@@ -25,7 +25,7 @@ public class GalleryActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-
+        imageList = new ArrayList<>();
         ImageAdapter adapter = new ImageAdapter(this, imageList);
         recyclerView.setAdapter(adapter);
         loadImages();
@@ -35,6 +35,9 @@ public class GalleryActivity extends AppCompatActivity {
     private void loadImages() {
 
         File folder = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if (folder == null) {
+            return;
+        }
         File[] files = folder.listFiles();
 
         imageList = new ArrayList<>();
