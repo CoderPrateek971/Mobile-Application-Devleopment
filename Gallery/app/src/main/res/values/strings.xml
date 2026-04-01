@@ -2,5 +2,6 @@
     <string name="app_name">Gallery</string>
     <string name="take_photo">Take Photo</string>
     <string name="delete">Delete</string>
+    <string name="open_gallery">Open Gallery</string>
 
 </resources>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button btn = findViewById(R.id.openGalleryBtn);
+
+        btn.setOnClickListener(v -> {
+            startActivity(new Intent(this, GalleryActivity.class));
+        });
     }
 
     public void takePhoto(View view) throws IOException {
@@ -53,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         return image;
     }
+
+
 
 
 }
