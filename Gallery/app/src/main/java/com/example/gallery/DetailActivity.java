@@ -13,7 +13,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.io.File;
 import java.util.Date;
 
 public class DetailActivity extends AppCompatActivity {
@@ -29,17 +28,13 @@ public class DetailActivity extends AppCompatActivity {
         detailsText = findViewById(R.id.detailsText);
         deleteBtn = findViewById(R.id.deleteBtn);
 
-        String path = getIntent().getStringExtra("path");
+        String uriString = getIntent().getStringExtra("path");
 
-        File file = new File(path);
+        Uri uri = Uri.parse(uriString);
 
-        imageView.setImageURI(Uri.fromFile(file));
+        imageView.setImageURI(uri);
 
-        String details =
-                "Name: " + file.getName() +
-                        "\nPath: " + path +
-                        "\nSize: " + file.length() +
-                        "\nDate: " + new Date(file.lastModified());
+        String details = "URI: " + uri.toString();
 
         detailsText.setText(details);
 
@@ -47,8 +42,13 @@ public class DetailActivity extends AppCompatActivity {
             new AlertDialog.Builder(this)
                     .setMessage("Delete this image?")
                     .setPositiveButton("Yes", (d, w) -> {
-                        file.delete();
-                        finish(); // go back
+                        try {
+                            getContentResolver().delete(uri, null, null);
+                            finish();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                     })
                     .setNegativeButton("No", null)
                     .show();

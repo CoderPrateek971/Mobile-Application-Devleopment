@@ -28,7 +28,8 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
-    static final int REQUEST_IMAGE = 1;
+    static final int REQUEST_FOLDER = 200;
+    static final int REQUEST_IMAGE = 100;
     Uri imageUri;
     String currentPath;
 
@@ -37,10 +38,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btn = findViewById(R.id.openGalleryBtn);
+        Button btn = findViewById(R.id.openFolderBtn);
 
         btn.setOnClickListener(v -> {
-            startActivity(new Intent(this, GalleryActivity.class));
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+            startActivityForResult(intent, REQUEST_FOLDER);
         });
     }
 
@@ -63,11 +65,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
             startActivityForResult(intent, REQUEST_IMAGE);
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(this, "Error creating image file", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private File createImageFile() throws IOException {
 
@@ -91,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
             File file = new File(currentPath);
 
             if (file.length() == 0 && data != null) {
-
                 try {
                     Bitmap photo = (Bitmap) data.getExtras().get("data");
 
@@ -103,10 +105,20 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+
+            if (requestCode == REQUEST_FOLDER && resultCode == RESULT_OK) {
+
+                Uri treeUri = data.getData();
+
+                Intent intent = new Intent(this, GalleryActivity.class);
+                intent.putExtra("folderUri", treeUri.toString());
+
+                startActivity(intent);
+            }
         }
     }
-
-
-
-
 }
+
+
+
+

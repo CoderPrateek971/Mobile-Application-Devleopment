@@ -10,14 +10,13 @@ import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
         Context context;
-        ArrayList<File> images;
+        ArrayList<Uri> images;
 
-        public ImageAdapter(Context context, ArrayList<File> images) {
+        public ImageAdapter(Context context, ArrayList<Uri> images) {
             this.context = context;
             this.images = images;
         }
@@ -32,12 +31,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
 
-            File file = images.get(position);
-            holder.imageView.setImageURI(Uri.fromFile(file));
+            Uri uri = images.get(position);
+            holder.imageView.setImageURI(uri);
 
             holder.imageView.setOnClickListener(v -> {
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("path", file.getAbsolutePath());
+                intent.putExtra("path", uri.toString());
                 context.startActivity(intent);
             });
         }

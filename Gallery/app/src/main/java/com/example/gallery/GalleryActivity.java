@@ -3,6 +3,8 @@ package com.example.gallery;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.net.Uri;
+import androidx.documentfile.provider.DocumentFile;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +19,9 @@ import java.util.ArrayList;
 
 public class GalleryActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    ArrayList<File> imageList;
+    ArrayList<Uri> imageList;
     ImageAdapter adapter;
+    Uri folderUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,24 +33,36 @@ public class GalleryActivity extends AppCompatActivity {
         imageList = new ArrayList<>();
         adapter = new ImageAdapter(this, imageList);
         recyclerView.setAdapter(adapter);
+        String uriString = getIntent().getStringExtra("folderUri");
+
+        if (uriString != null) {
+            folderUri = Uri.parse(uriString);
+        }
         loadImages();
 
 
     }
     private void loadImages() {
 
-        File folder = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        if (folder == null) {
-            return;
-        }
-        File[] files = folder.listFiles();
         imageList.clear();
 
-        Log.d("DEBUG", "Folder: " + folder.getAbsolutePath());
-        if (files != null) {
-            for (File file : files) {
-                if (file.getName().endsWith(".jpg")) {
-                    imageList.add(file);
+
+        if (folderUri == null) {
+            return;
+        }
+        DocumentFile folder = DocumentFile.fromTreeUri(this, folderUri);
+
+        if (folder != null && folder.isDirectory()) {
+            for (DocumentFile file : folder.listFiles()) {
+
+                String name = file.getName();
+
+                if (name != null &&
+                        (name.endsWith(".jpg") ||
+                                name.endsWith(".png") ||
+                                name.endsWith(".jpeg"))) {
+
+                    imageList.add(file.getUri());
                 }
             }
         }

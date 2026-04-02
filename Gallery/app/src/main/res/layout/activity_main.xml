@@ -8,18 +8,23 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/openGalleryBtn"
+        android:id="@+id/openFolderBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/open_gallery"/>
+        android:layout_marginBottom="268dp"
+        android:text="@string/open_folder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="53dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginBottom="64dp"
         android:onClick="takePhoto"
         android:text="Take Photo"
-        app:layout_constraintTop_toBottomOf="@+id/openGalleryBtn"
+        app:layout_constraintBottom_toTopOf="@+id/openFolderBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976"
         tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
