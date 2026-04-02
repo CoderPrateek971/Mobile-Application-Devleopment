@@ -5,15 +5,14 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import java.util.Date;
+import androidx.documentfile.provider.DocumentFile;
+
+
 
 public class DetailActivity extends AppCompatActivity {
     ImageView imageView;
@@ -23,13 +22,13 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        Toast.makeText(this, "My Activity Opened", Toast.LENGTH_SHORT).show();
 
         imageView = findViewById(R.id.imageView);
         detailsText = findViewById(R.id.detailsText);
         deleteBtn = findViewById(R.id.deleteBtn);
 
         String uriString = getIntent().getStringExtra("path");
-
         Uri uri = Uri.parse(uriString);
 
         imageView.setImageURI(uri);
@@ -42,11 +41,15 @@ public class DetailActivity extends AppCompatActivity {
             new AlertDialog.Builder(this)
                     .setMessage("Delete this image?")
                     .setPositiveButton("Yes", (d, w) -> {
-                        try {
-                            getContentResolver().delete(uri, null, null);
+
+                        DocumentFile documentFile =
+                                DocumentFile.fromSingleUri(this, uri);
+
+                        if (documentFile != null && documentFile.delete()) {
+                            Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
                             finish();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        } else {
+                            Toast.makeText(this, "Delete failed", Toast.LENGTH_SHORT).show();
                         }
 
                     })

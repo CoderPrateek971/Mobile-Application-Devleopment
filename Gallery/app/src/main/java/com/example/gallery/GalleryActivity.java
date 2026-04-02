@@ -1,20 +1,13 @@
 package com.example.gallery;
 
+
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.net.Uri;
 import androidx.documentfile.provider.DocumentFile;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.io.File;
 import java.util.ArrayList;
 
 public class GalleryActivity extends AppCompatActivity {

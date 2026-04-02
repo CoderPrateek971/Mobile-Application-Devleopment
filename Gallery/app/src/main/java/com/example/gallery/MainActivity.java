@@ -11,17 +11,10 @@ import android.widget.Button;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.widget.Toast;
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -76,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
         String name = "IMG_" + System.currentTimeMillis();
 
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM
+        );
 
         File image = File.createTempFile(name, ".jpg", storageDir);
 
@@ -93,26 +88,33 @@ public class MainActivity extends AppCompatActivity {
 
             File file = new File(currentPath);
 
-            if (file.length() == 0 && data != null) {
+            if (file.length() == 0 && data != null && data.getExtras() != null) {
                 try {
                     Bitmap photo = (Bitmap) data.getExtras().get("data");
-
-                    FileOutputStream fos = new FileOutputStream(file);
-                    photo.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                    fos.close();
-
+                    if (photo != null) {
+                        FileOutputStream fos = new FileOutputStream(file);
+                        photo.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                        fos.close();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+            Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
+        }else if (requestCode == REQUEST_FOLDER && resultCode == RESULT_OK && data != null) {
 
-            if (requestCode == REQUEST_FOLDER && resultCode == RESULT_OK) {
+            Uri treeUri = data.getData();
 
-                Uri treeUri = data.getData();
-
+            if (treeUri != null) {
+                int takeFlags = data.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                try {
+                    getContentResolver().takePersistableUriPermission(treeUri, takeFlags);
+                } catch (SecurityException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "Permission denied by system", Toast.LENGTH_SHORT).show();
+                }
                 Intent intent = new Intent(this, GalleryActivity.class);
                 intent.putExtra("folderUri", treeUri.toString());
-
                 startActivity(intent);
             }
         }
