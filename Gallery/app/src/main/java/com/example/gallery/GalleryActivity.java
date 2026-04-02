@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class GalleryActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<File> imageList;
+    ImageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class GalleryActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         imageList = new ArrayList<>();
-        ImageAdapter adapter = new ImageAdapter(this, imageList);
+        adapter = new ImageAdapter(this, imageList);
         recyclerView.setAdapter(adapter);
         loadImages();
 
@@ -40,9 +41,8 @@ public class GalleryActivity extends AppCompatActivity {
             return;
         }
         File[] files = folder.listFiles();
+        imageList.clear();
 
-
-        imageList = new ArrayList<>();
         Log.d("DEBUG", "Folder: " + folder.getAbsolutePath());
         if (files != null) {
             for (File file : files) {
@@ -51,8 +51,8 @@ public class GalleryActivity extends AppCompatActivity {
                 }
             }
         }
+        adapter.notifyDataSetChanged();
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
     }
 
     @Override

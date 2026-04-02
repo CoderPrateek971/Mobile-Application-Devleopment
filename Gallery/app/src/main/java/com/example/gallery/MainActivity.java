@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.widget.Toast;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, REQUEST_IMAGE);
         }catch(IOException e){
             e.printStackTrace();
+            Toast.makeText(this, "Error creating image file", Toast.LENGTH_SHORT).show();
         }
     }
 
