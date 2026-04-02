@@ -1,6 +1,7 @@
 package com.example.gallery;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,6 +21,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
@@ -75,6 +77,30 @@ public class MainActivity extends AppCompatActivity {
         currentPath = image.getAbsolutePath();
 
         return image;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_IMAGE && resultCode == RESULT_OK) {
+
+            File file = new File(currentPath);
+
+            if (file.length() == 0 && data != null) {
+
+                try {
+                    Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+                    FileOutputStream fos = new FileOutputStream(file);
+                    photo.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                    fos.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 
