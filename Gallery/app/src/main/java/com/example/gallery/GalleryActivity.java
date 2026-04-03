@@ -3,6 +3,9 @@ package com.example.gallery;
 
 import android.os.Bundle;
 import android.net.Uri;
+import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
+
 import androidx.documentfile.provider.DocumentFile;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +23,10 @@ public class GalleryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
@@ -31,7 +38,16 @@ public class GalleryActivity extends AppCompatActivity {
         if (uriString != null) {
             folderUri = Uri.parse(uriString);
         }
-        loadImages();
+
+        String folderName = "Pixel Gallery";
+
+        if (folderUri != null) {
+            DocumentFile folder = DocumentFile.fromTreeUri(this, folderUri);
+            if (folder != null && folder.getName() != null) {
+                folderName = folder.getName();
+            }
+        }
+        getSupportActionBar().setTitle(folderName);
 
 
     }
@@ -43,23 +59,35 @@ public class GalleryActivity extends AppCompatActivity {
         if (folderUri == null) {
             return;
         }
-        DocumentFile folder = DocumentFile.fromTreeUri(this, folderUri);
+        try {
+            DocumentFile folder = DocumentFile.fromTreeUri(this, folderUri);
 
-        if (folder != null && folder.isDirectory()) {
-            for (DocumentFile file : folder.listFiles()) {
+            if (folder != null && folder.isDirectory()) {
 
-                String name = file.getName();
+                DocumentFile[] files = folder.listFiles();
 
-                if (name != null &&
-                        (name.endsWith(".jpg") ||
-                                name.endsWith(".png") ||
-                                name.endsWith(".jpeg"))) {
+                if (files != null) {
+                    for (DocumentFile file : files) {
+                        String name = file.getName();
+                        if (name != null) {
+                            String lowerName = name.toLowerCase();
+                            if (lowerName.endsWith(".jpg") ||
+                                    lowerName.endsWith(".png") ||
+                                    lowerName.endsWith(".jpeg")) {
 
-                    imageList.add(file.getUri());
+                                imageList.add(file.getUri());
+                            }
+                        }
+                    }
                 }
             }
+        }catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Cannot read this folder. Try a different one.", Toast.LENGTH_LONG).show();
+            finish();
         }
         adapter.notifyDataSetChanged();
+
 
     }
 

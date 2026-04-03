@@ -88,36 +88,39 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_IMAGE && resultCode == RESULT_OK) {
 
-            File file = new File(currentPath);
-
-            if (file.length() == 0 && data != null && data.getExtras() != null) {
-                try {
-                    Bitmap photo = (Bitmap) data.getExtras().get("data");
-                    if (photo != null) {
-                        FileOutputStream fos = new FileOutputStream(file);
-                        photo.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                        fos.close();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+//            File file = new File(currentPath);
+//
+//            if (file.length() == 0 && data != null && data.getExtras() != null) {
+//                try {
+//                    Bitmap photo = (Bitmap) data.getExtras().get("data");
+//                    if (photo != null) {
+//                        FileOutputStream fos = new FileOutputStream(file);
+//                        photo.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//                        fos.close();
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
             Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
         }else if (requestCode == REQUEST_FOLDER && resultCode == RESULT_OK && data != null) {
+
 
             Uri treeUri = data.getData();
 
             if (treeUri != null) {
-                int takeFlags = data.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                try {
+                try{
+                    int takeFlags = data.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
                     getContentResolver().takePersistableUriPermission(treeUri, takeFlags);
+                    Intent intent = new Intent(this, GalleryActivity.class);
+                    intent.putExtra("folderUri", treeUri.toString());
+                    startActivity(intent);
                 } catch (SecurityException e) {
                     e.printStackTrace();
                     Toast.makeText(this, "Permission denied by system", Toast.LENGTH_SHORT).show();
                 }
-                Intent intent = new Intent(this, GalleryActivity.class);
-                intent.putExtra("folderUri", treeUri.toString());
-                startActivity(intent);
+
             }
         }
     }

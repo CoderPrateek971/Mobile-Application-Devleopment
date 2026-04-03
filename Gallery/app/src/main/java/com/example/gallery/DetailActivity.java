@@ -1,5 +1,6 @@
 package com.example.gallery;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.documentfile.provider.DocumentFile;
 
 
@@ -26,24 +28,56 @@ public class DetailActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         detailsText = findViewById(R.id.detailsText);
         deleteBtn = findViewById(R.id.deleteBtn);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        String uriString = getIntent().getStringExtra("path");
-        Uri uri = Uri.parse(uriString);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
+
+        Uri uri = getIntent().getData();
+        try {
+            getContentResolver().takePersistableUriPermission(
+                    uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         imageView.setImageURI(uri);
 
-        String details = "URI: " + uri.toString();
+        DocumentFile documentFile = DocumentFile.fromSingleUri(this, uri);
+        String detailsToDisplay = "Details not available";
 
-        detailsText.setText(details);
+        if (documentFile != null && documentFile.exists()) {
+            String name = documentFile.getName();
+            long sizeBytes = documentFile.length();
+            long lastModified = documentFile.lastModified();
 
-        deleteBtn.setOnClickListener(v -> {
+            String sizeString;
+            if (sizeBytes > 1024 * 1024) {
+                sizeString = String.format(java.util.Locale.getDefault(), "%.2f MB", sizeBytes / (1024.0 * 1024.0));
+            } else {
+                sizeString = String.format(java.util.Locale.getDefault(), "%.2f KB", sizeBytes / 1024.0);
+            }
+
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMM dd, yyyy • hh:mm a", java.util.Locale.getDefault());
+            String dateString = sdf.format(new java.util.Date(lastModified));
+
+            detailsToDisplay = "Name: " + name + "\n" +
+                    "Size: " + sizeString + "\n" +
+                    "Date: " + dateString;
+        }
+
+        detailsText.setText(detailsToDisplay);
+
+
+
+            deleteBtn.setOnClickListener(v -> {
             new AlertDialog.Builder(this)
                     .setMessage("Delete this image?")
                     .setPositiveButton("Yes", (d, w) -> {
-
-                        DocumentFile documentFile =
-                                DocumentFile.fromSingleUri(this, uri);
-
                         if (documentFile != null && documentFile.delete()) {
                             Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
                             finish();
@@ -55,5 +89,6 @@ public class DetailActivity extends AppCompatActivity {
                     .setNegativeButton("No", null)
                     .show();
         });
+
     }
 }

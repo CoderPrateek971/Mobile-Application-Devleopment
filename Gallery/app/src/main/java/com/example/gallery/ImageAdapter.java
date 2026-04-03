@@ -35,16 +35,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
             Uri uri = images.get(position);
             holder.imageView.setImageURI(null);
             holder.imageView.setImageURI(uri);
-            holder.imageView.setClickable(false);
-            holder.imageView.setFocusable(false);
-            holder.itemView.setClickable(true);
+
 
             holder.itemView.setOnClickListener(v -> {
 
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("path", uri.toString());
+                intent.setData(uri);
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
+                intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 context.startActivity(intent);
             });
         }
