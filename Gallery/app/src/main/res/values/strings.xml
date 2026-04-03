@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">Gallery</string>
+    <string name="app_name">Pixel Gallery</string>
     <string name="delete">Delete Image</string>
     <string name="open_folder">Open Folder</string>
     <string name="takePhoto">Take Photo</string>
+    <string name="action">Quick Actions</string>
+    <string name="sub_title">Choose an action to continue</string>
 
 </resources>
