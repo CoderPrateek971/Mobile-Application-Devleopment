@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         btn.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+            Uri rootUri = Uri.parse("content://com.android.externalstorage.documents/document/primary%3A");
+            intent.putExtra(android.provider.DocumentsContract.EXTRA_INITIAL_URI, rootUri);
             startActivityForResult(intent, REQUEST_FOLDER);
         });
     }

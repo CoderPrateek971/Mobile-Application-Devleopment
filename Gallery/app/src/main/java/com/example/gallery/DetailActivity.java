@@ -22,7 +22,6 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        Toast.makeText(this, "My Activity Opened", Toast.LENGTH_SHORT).show();
 
         imageView = findViewById(R.id.imageView);
         detailsText = findViewById(R.id.detailsText);

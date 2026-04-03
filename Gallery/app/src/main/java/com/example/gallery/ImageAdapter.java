@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,8 +40,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
             holder.itemView.setClickable(true);
 
             holder.itemView.setOnClickListener(v -> {
-                Toast.makeText(context, "Clicked!", Toast.LENGTH_SHORT).show();
-                Toast.makeText(context, "ITEM CLICK", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("path", uri.toString());
