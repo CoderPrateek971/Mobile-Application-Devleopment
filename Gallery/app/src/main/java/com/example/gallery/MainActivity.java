@@ -86,20 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_IMAGE && resultCode == RESULT_OK) {
 
-//            File file = new File(currentPath);
-//
-//            if (file.length() == 0 && data != null && data.getExtras() != null) {
-//                try {
-//                    Bitmap photo = (Bitmap) data.getExtras().get("data");
-//                    if (photo != null) {
-//                        FileOutputStream fos = new FileOutputStream(file);
-//                        photo.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-//                        fos.close();
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
             Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
         }else if (requestCode == REQUEST_FOLDER && resultCode == RESULT_OK && data != null) {
 
