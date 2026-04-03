@@ -3,7 +3,9 @@ package com.example.currencyconverter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Switch;
+import android.widget.ImageButton;
+
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -27,11 +29,11 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        Button backBtn = findViewById(R.id.backBtn);
+        ImageButton backBtn = findViewById(R.id.backBtn);
 
         backBtn.setOnClickListener(v -> finish());
 
-        Switch themeSwitch = findViewById(R.id.themeSwitch);
+        MaterialSwitch  themeSwitch = findViewById(R.id.themeSwitch);
         themeSwitch.setChecked(isDark);
 
         themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
