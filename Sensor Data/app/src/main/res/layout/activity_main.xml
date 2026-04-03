@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="20dp"
+    android:background="#0B1220"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,34 +12,113 @@
         android:id="@+id/heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="25sp"
+        android:text="Sensor Dashboard"
+        android:textSize="28sp"
+        android:textColor="#E2E8F0"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         android:textAlignment="center"/>
 
-    <TextView
-        android:id="@+id/accelText"
-        android:text="@string/accelerometer"
-        android:textSize="18sp"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"/>
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="#111827">
 
-    <TextView
-        android:id="@+id/lightText"
-        android:text="@string/light"
-        android:textSize="18sp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:text="Accelerometer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#94A3B8"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/accelText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/accelerometer"
+                android:textColor="#38BDF8"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"/>
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="#111827">
 
-    <TextView
-        android:id="@+id/proximityText"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Light Sensor"
+                android:textColor="#94A3B8"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/lightText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/light"
+                android:textColor="#22C55E"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/proximity"
-        android:textSize="18sp" />
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="#111827">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
 
+            <TextView
+                android:text="Proximity Sensor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#94A3B8"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/proximityText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/proximity"
+                android:textColor="#FACC15"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
+
