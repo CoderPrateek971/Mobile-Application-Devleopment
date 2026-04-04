@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:title="Gallery"
+        android:title="@string/Gallery"
         android:titleTextColor="@android:color/white"
         android:background="@android:color/white"
         app:navigationIcon="@android:drawable/ic_menu_revert"
