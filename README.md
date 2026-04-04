@@ -104,65 +104,47 @@ A complete image management application with camera and gallery functionality.
 1. Clone this repository:
 ```bash
 git clone https://github.com/CoderPrateek971/Mobile-Application-Devleopment
+```
 
-Open the project in Android Studio
+2. Open the project in Android Studio
 
-Select the desired module:
+3. Select the desired module:
+   
+       CurrencyConverter
+       Media Player
+       Sensor Data
+       Gallery
 
-CurrencyConverter
+5. Build and run the application on:
 
-Media Player
+       Android Emulator
+       OR
+       Physical Android Device
 
-Sensor Data
 
-Gallery
-
-Build and run the application on:
-
-Android Emulator
-OR
-
-Physical Android Device
-
-🔐 Permissions Required
+## 🔐 Permissions Required
 
 Depending on the module, the following permissions may be required:
 
-📷 Camera Permission (for capturing images)
+    📷 Camera Permission (for capturing images)
 
-📁 Storage Permission (for reading/writing files)
+    📁 Storage Permission (for reading/writing files)
 
-🌐 Internet Permission (for streaming media)
+    🌐 Internet Permission (for streaming media)
 
 📌 Project Highlights
 
-Modular structure (each question as a separate project)
+- Modular structure (each question as a separate project)
 
-Clean and readable code
+- Clean and readable code
 
-Proper UI design using Material Components
+- Proper UI design using Material Components
 
-Error handling implemented
+- Error handling implemented
 
-Tested on both emulator and real device
+- Tested on both emulator and real device
 
-📷 Screenshots
 
-Add screenshots of each app here for better presentation
-
-Example:
-
-code
-Text
-download
-content_copy
-expand_less
-/screenshots/currency.png
-/screenshots/media.png
-/screenshots/sensor.png
-/screenshots/gallery.png
-
-```
 ---
 
 ##  Author
