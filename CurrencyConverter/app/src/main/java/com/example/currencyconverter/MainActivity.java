@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         result = findViewById(R.id.result);
         converterBtn = findViewById(R.id.convertBtn);
 
-        // Use string-array from XML
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.currencies,

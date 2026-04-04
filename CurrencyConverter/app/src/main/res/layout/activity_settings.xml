@@ -65,7 +65,7 @@
             android:padding="20dp">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/enableDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/dark_mode"
