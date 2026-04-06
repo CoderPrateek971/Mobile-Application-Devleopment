@@ -103,7 +103,7 @@ A complete image management application with camera and gallery functionality.
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/CoderPrateek971/Mobile-Application-Devleopment
+git clone https://github.com/CoderPrateek971/Mobile-Application-Development
 ```
 
 2. Open the project in Android Studio
